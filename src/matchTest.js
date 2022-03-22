@@ -1,5 +1,3 @@
-
-
 let bot = {
   guess: {
     character: [0, 0, 0, 0, 0],
@@ -13,17 +11,16 @@ let bot = {
 function letterIncluded(letter, pos) {
 
   let j = 0;
+  let y = 0;
+
   for (let word of bot.wordsInMind) {
     if (word[pos] === letter) {
       bot.wordsInMind.splice(j, 1);
-      console.log('yes');
       //j--;
     }
-    console.log(bot.wordsInMind);
     j++;
   }
-  //console.log(bot.wordsInMind);
-  y = 0;
+
   for (let word of bot.wordsInMind) {
     let n = 1;
     for (let i = 0; i < word.length; i++) {
@@ -31,38 +28,17 @@ function letterIncluded(letter, pos) {
         console.log("other yes", y);
         n = 0;
       }
-
     }
     if (n) {
       bot.wordsInMind.splice(y, 1);
       //y--;
     }
     y++;
-    //console.log(bot.wordsInMind);
   }
-
+  console.log(bot.wordsInMind);
   // return (bot.wordsInMind);
 }
-letterIncluded('s', 3);
-
-function test(letter, pos) {
-  const answer = 'brick';
-  let j = 0;
-  for (let word of bot.wordsInMind) {
-    console.log(word);
-    for (let char of word) {
-      console.log(answer[pos]);
-      if (letter !== answer[pos] && answer.includes(char)) {
-        bot.wordsInMind.splice(j, 1);
-        console.log('yes')
-      }
-    }
-    j++;
-    console.log(bot.wordsInMind);
-  }
-}
-// test('i', 2);
-
+// letterIncluded('s', 3);
 
 //// green condition ////
 function letterAtPos(letter, pos) {
@@ -92,7 +68,7 @@ function letterNotIncluded(letter) {
   console.log(bot.wordsInMind);
   // return (bot.wordsInMind);
 }
-// letterNotIncluded('r');
+// letterNotIncluded('s');
 
 
 
