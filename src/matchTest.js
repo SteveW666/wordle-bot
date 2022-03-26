@@ -56,19 +56,18 @@ function letterAtPos(letter, pos) {
 
 //// grey condition ////
 function letterNotIncluded(letter) {
-  let j = 0;
+  //const charArr = [];
   for (let word of bot.wordsInMind) {
-    for (let i = 0; i < word.length; i++) {
-      if (letter === word[i]) {
-        bot.wordsInMind.splice(j, 1);
-      }
+    // console.log(word);
+    if (!word.includes(letter)) {
+      console.log(word);
+      bot.wordsInMind.splice(bot.wordsInMind[word])
     }
-    j++;
   }
-  console.log(bot.wordsInMind);
+  // console.log(bot.wordsInMind);
   // return (bot.wordsInMind);
 }
-// letterNotIncluded('s');
+letterNotIncluded('s');
 
 
 
