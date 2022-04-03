@@ -1,3 +1,7 @@
+const { letterIncludedAtPos, letterIncluded } = require('./filterFunctions');
+
+require('./filterFunctions');
+
 let bot = {
   guess: {
     character: [0, 0, 0, 0, 0],

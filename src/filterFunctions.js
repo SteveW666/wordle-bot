@@ -49,3 +49,4 @@ function letterIncluded(letter, pos) {
 }
 // letterIncluded('m', 3);
 
+module.exports = {letterIncluded, letterIncludedAtPos, letterNotIncluded};
