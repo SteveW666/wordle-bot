@@ -1,5 +1,3 @@
-const { letterIncludedAtPos, letterIncluded } = require('./filterFunctions');
-
 require('./filterFunctions');
 
 let bot = {
