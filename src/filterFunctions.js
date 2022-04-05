@@ -54,6 +54,6 @@ function letterIncludedAtPos(letter, pos) {
   // return newWords;
 }
 letterIncludedAtPos('c', 0);
-console.log("after all", afterGreen);
+// console.log("after all", afterGreen.length);
 
 module.exports = {letterIncluded, letterIncludedAtPos, letterNotIncluded};

@@ -1,4 +1,9 @@
+const { createWordList } = require('./createWordArray');
+
 require('./filterFunctions');
+
+let wordList = createWordList();
+// console.log("from matchTest.js", wordList);
 
 let bot = {
   guess: {
@@ -8,4 +13,10 @@ let bot = {
   },
   wordsInMind: ['broke', 'clasp', 'glass', 'brick', 'smash', 'sweat']
 };
+
+let targetWord = wordList[Math.floor(Math.random() * wordList.length)];
+
+console.log(targetWord);
+
+
 

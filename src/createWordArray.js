@@ -10,7 +10,7 @@ function createWordList() {
       // console.log(words[i].length)
     }
   }
-  console.log(fiveLetterWords);
+  // console.log(fiveLetterWords);
   return fiveLetterWords;
 }
 
