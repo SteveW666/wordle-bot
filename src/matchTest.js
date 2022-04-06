@@ -1,22 +1,32 @@
 const { createWordList } = require('./createWordArray');
-
 require('./filterFunctions');
 
 let wordList = createWordList();
-// console.log("from matchTest.js", wordList);
-
+// let target = wordList[Math.floor(Math.random() * wordList.length)];
+// console.log("target word: ", target);
+let target = 'alarm';
+const starter = 'alert';
 let bot = {
   guess: {
-    character: [0, 0, 0, 0, 0],
-    position: [1, 2, 3, 4, 5],
-    value: [0, 0, 0, 0, 0]
+    char: [0, 0, 0, 0, 0],
+    val: [0, 0, 0, 0, 0],
+    pos: [1, 2, 3, 4, 5]
   },
-  wordsInMind: ['broke', 'clasp', 'glass', 'brick', 'smash', 'sweat']
 };
 
-let targetWord = wordList[Math.floor(Math.random() * wordList.length)];
-
-console.log(targetWord);
+function updateBot() {
+  for (let i = 0; i < 5; i++) {
+    //green condition
+    if (starter[i] === target[i]) {
+      console.log(`${starter}/${target}: matched ${target[i]} @ ${i}`);
+      bot.guess.char[i] = starter[i];
+      bot.guess.val[i] = '√';
+    }
+  }
+  return bot;
+}
+updateBot();
+console.log(bot);
 
 
 
