@@ -1,59 +1,54 @@
+const util = require('util')
 const { createWordList } = require('./createWordArray');
 
 let wordList = createWordList();
-let afterGrey = [];
-let afterYellow = [];
-let afterGreen = [];
 
 //// yellow condition ////
 // removes possibilities where a letter exists
 // at specific index, also requires
 // that a letter be in a word...
-function letterIncluded(letter, pos) {
-  // let newWords = [];
-    for (let word of wordList) {
-      if (word.includes(letter) && word[pos] !== letter) {
-        // console.log(`words with ${letter} NOT @ ${pos}`, word);
-        afterYellow.push(word);
-      }
+function letterIncluded(yellow, letter, pos) {
+  let afterYellow = [];
+  for (let word of yellow) {
+    if (word.includes(letter) && word[pos] !== letter) {
+      // console.log(`words with ${letter} NOT @ ${pos}`, word);
+      afterYellow.push(word);
     }
-  // console.log(newWords);
-  // return newWords;
+  }
+  return afterYellow;
 }
-letterIncluded('l', 3);
-// console.log(afterYellow);
+// let newList = letterIncluded(wordList, 'l', 0);
+// console.log(util.inspect(newList, { maxArrayLength: null }));
 
 //// grey condition ////
 // removes possibilities which include the letter
-function letterNotIncluded(letter) {
-  // let newWords = [];
-  for (let word of afterYellow) {
+function letterNotIncluded(grey, letter) {
+  let afterGrey = [];
+  for (let word of grey) {
     if (!word.includes(letter)) {
       // console.log(`words that don't include ${letter}`, word);
       afterGrey.push(word);
     }
   }
-  // console.log(newWords);
-  // return newWords;
+  return afterGrey;
 }
-letterNotIncluded('m');
-// console.log(afterGrey);
+// let newList = letterNotIncluded(wordList, 'm');
+// console.log(util.inspect(newList, { maxArrayLength: null }));
 
 //// green condition ////
 // removes possibilities where letter doesn't exist
 // at specific index
-function letterIncludedAtPos(letter, pos) {
-  // let newWords = [];
-    for (let word of afterGrey) {
-      if (word.includes(letter) && word[pos] === letter) {
-        // console.log(`words with ${letter} @ ${pos}`, word);
-        afterGreen.push(word);
-      }
+function letterIncludedAtPos(green, letter, pos) {
+  let afterGreen = [];
+  for (let word of green) {
+    if (word.includes(letter) && word[pos] === letter) {
+      // console.log(`words with ${letter} @ ${pos}`, word);
+      afterGreen.push(word);
     }
-  // console.log(newWords);
-  // return newWords;
+  }
+  return afterGreen;
 }
-letterIncludedAtPos('c', 0);
-// console.log("after all", afterGreen.length);
+// let newList = letterIncludedAtPos(wordList, 'c', 0);
+// console.log(util.inspect(newList, { maxArrayLength: null }));
 
-module.exports = {letterIncluded, letterIncludedAtPos, letterNotIncluded};
+module.exports = { letterIncluded, letterIncludedAtPos, letterNotIncluded };
