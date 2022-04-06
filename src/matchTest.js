@@ -21,7 +21,7 @@ function updateBot() {
       bot.char[i] = starter[i];
       bot.val[i] = 2;
     }
-    //yellow
+    //yellow condition
     if (target.includes(starter[i]) && bot.val[i] !== 2) {
       console.log(`target includes ${starter[i]}, but not @ pos ${i}`);
       bot.val[i] = 1;
@@ -32,6 +32,7 @@ function updateBot() {
 }
 updateBot();
 console.log(bot);
+
 
 
 
