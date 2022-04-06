@@ -10,7 +10,7 @@ let wordList = createWordList();
 function letterIncluded(yellow, letter, pos) {
   let afterYellow = [];
   for (let word of yellow) {
-    if (word.includes(letter) && word[pos] !== letter) {
+    if (word.includes(letter) && (word[pos] !== letter)) {
       // console.log(`words with ${letter} NOT @ ${pos}`, word);
       afterYellow.push(word);
     }
@@ -50,5 +50,29 @@ function letterIncludedAtPos(green, letter, pos) {
 }
 // let newList = letterIncludedAtPos(wordList, 'c', 0);
 // console.log(util.inspect(newList, { maxArrayLength: null }));
+
+//return array rep wordle block assuming guess and answer
+function compare(currentList, guess, answer) {
+
+  let block = [];
+  let newList = [];
+  let newList = = letterIncluded(currentList, guess[0], 0);
+  let i = 1;
+
+  while (newList.length >= ()) {
+    //yellow?
+    newList = letterIncluded(newList, guess[i], i);
+    if (newList.includes(answer)) {
+      block[i] = 1;
+    }
+  }
+
+  newList = currentList;
+
+  for (i = 0; i < answer.length; i++) {
+    //green
+    newList = newList.letterIncludedAtPos(newList, guess[i]);
+  }
+}
 
 module.exports = { letterIncluded, letterIncludedAtPos, letterNotIncluded };
