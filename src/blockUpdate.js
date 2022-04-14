@@ -10,12 +10,18 @@ function charCount(word, char) {
 };
 
 //Checks for a yellow block
-//returns a boolean 
-function letterYellow(answer, letter, pos, occurences) {
-  if (answer.includes(letter) && answer[pos] !== letter && charCount(answer, letter) >= occurences) {
-    return 1;
+//returns a [boolean, index used in answer] pair
+function letterYellow(answer, letter, usedAnswerIndices) {
+  // search answer for `letter` without using any of the indices in answer given in usedAnswerIndices
+  for (j = 0; j < answer.length; j++) {
+    if (usedAnswerIndices.has(j)) {
+      continue;
+    }
+    if (answer[j] === letter) {
+      return [true, j]
+    }
   }
-  else return 0;
+  return [false, -1]
 };
 // console.log(letterYellow('trope', 'e', 2, 2));
 
@@ -32,28 +38,34 @@ function letterGreen(answer, letter, pos) {
 function ascii (a) { return a.charCodeAt(0); }
 
 function compareWords(guess, answer) {
+  console.log('guess: ', guess)
+  console.log('answer: ', answer)
+
   let charBlock = [0, 0, 0, 0, 0];
-  let occurrences = [];
-  for (let o = 0; o < 128; o++) {
-    occurrences[o] = 0;
-  }
+  let usedAnswerIndices = new Set()
 
   for (let i = 0; i < answer.length; i++) {
     //green block
     if (letterGreen(answer, guess[i], i)) {
       charBlock[i] = 2;
-      occurrences[ascii(guess[i])]++;
-    } else if (letterYellow(answer, guess[i], i, occurrences[ascii(guess[i])])) {
+      usedAnswerIndices.add(i)
+    }
+  }
+  
+  for (let i = 0; i < answer.length; i++) {
+    const [isYellow, indexUsedInAnswer] = letterYellow(answer, guess[i], usedAnswerIndices)
+    if (isYellow) {
       //yellow block
       console.log('INSIDE YELLOW')
       charBlock[i] = 1;
-      occurrences[ascii(guess[i])]++;
-      console.log(occurrences[ascii(guess[i])]);
-    } else {
-      //grey block
-      charBlock[i] = 0;
+
+      console.log('used: ', indexUsedInAnswer)
+      usedAnswerIndices.add(indexUsedInAnswer)
     }
   }
+
   return charBlock;
 };
-console.log(compareWords('smart', 'alarm'));
+
+console.log(compareWords('teeth', 'trope'));
+console.log(compareWords('tooth', 'trope'));
