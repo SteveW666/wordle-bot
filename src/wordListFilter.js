@@ -1,6 +1,7 @@
-const util = require('util')
-const { createWordList } = require('./createWordArray');
+// const util = require('util');
+// console.log(util.inspect(Array, { maxArrayLength: null }));
 
+const { createWordList } = require('./createWordArray');
 let wordList = createWordList();
 
 //// yellow condition ////
@@ -18,7 +19,6 @@ function letterIncluded(yellow, letter, pos) {
   return afterYellow;
 }
 // let newList = letterIncluded(wordList, 'l', 0);
-// console.log(util.inspect(newList, { maxArrayLength: null }));
 
 //// grey condition ////
 // removes possibilities which include the letter
