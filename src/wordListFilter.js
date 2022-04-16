@@ -4,12 +4,6 @@
 const { createWordList } = require('./createWordArray');
 const { compareWords} = require("./initialBlockUpdate");
 
-const bot = {
-  char: [],
-  val: [],
-  pos: [],
-  yellowLetters: []
-};
 
 let wordList = createWordList();
 let guess = 'smart';
@@ -19,13 +13,15 @@ let valBlock = compareWords(guess, answer);
 
 compareWords(guess, answer);
 
+  const bot = {
+    char: [],
+    val: valBlock,
+    pos: [],
+    yellowLetters: []
+  };
+
 function updateBot() {
-
   //after comparing first guess against answer
-  //update bot.val as valBlock from compareWords
-  bot.val = valBlock;
-  // console.log("assign bot.val", bot);
-
   for (let i = 0; i < answer.length; i++) {
     //for testing, assign length to bot.pos
     bot.pos.push(i);
