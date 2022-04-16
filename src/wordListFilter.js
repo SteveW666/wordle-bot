@@ -2,77 +2,50 @@
 // console.log(util.inspect(Array, { maxArrayLength: null }));
 
 const { createWordList } = require('./createWordArray');
+const { compareWords} = require("./initialBlockUpdate");
+
+const bot = {
+  char: new Array(),
+  val: new Array(),
+  pos: new Array(),
+};
+
 let wordList = createWordList();
+let guess = 'smart';
+let answer = 'alert';
+// let answer = wordList[Math.floor(Math.random() * wordList.length)];
+let valBlock = compareWords(guess, answer);
 
-//// yellow condition ////
-// removes possibilities where a letter exists
-// at specific index, also requires
-// that a letter be in a word...
-function letterIncluded(yellow, letter, pos) {
-  let afterYellow = [];
-  for (let word of yellow) {
-    if (word.includes(letter) && (word[pos] !== letter)) {
-      // console.log(`words with ${letter} NOT @ ${pos}`, word);
-      afterYellow.push(word);
+compareWords(guess, answer);
+
+function updateBot() {
+  console.log("bot know not", bot);
+
+  //for testing, assign length to bot.pos
+  for (let i = 0; i < answer.length; i++) {
+    bot.pos.push(i);
+  }
+  console.log("assign bot.pos", bot);
+
+  //after comparing first guess against answer
+  //update bot.val as valBlock from compareWords
+  bot.val = valBlock;
+  console.log("assign bot.val", bot);
+
+  //get green letters in right pos
+  for (let i = 0; i < answer.length; i++) {
+    if (bot.val[i] === 2) {
+      bot.char[i] = answer[i];
+    } else {
+      bot.char[i] = '?';
     }
   }
-  return afterYellow;
-}
-// let newList = letterIncluded(wordList, 'l', 0);
+  console.log("assign green letters", bot);
+  return bot;
+};
 
-//// grey condition ////
-// removes possibilities which include the letter
-function letterNotIncluded(grey, letter) {
-  let afterGrey = [];
-  for (let word of grey) {
-    if (!word.includes(letter)) {
-      // console.log(`words that don't include ${letter}`, word);
-      afterGrey.push(word);
-    }
-  }
-  return afterGrey;
-}
-// let newList = letterNotIncluded(wordList, 'm');
-// console.log(util.inspect(newList, { maxArrayLength: null }));
+updateBot();
 
-//// green condition ////
-// removes possibilities where letter doesn't exist
-// at specific index
-function letterIncludedAtPos(green, letter, pos) {
-  let afterGreen = [];
-  for (let word of green) {
-    if (word.includes(letter) && word[pos] === letter) {
-      // console.log(`words with ${letter} @ ${pos}`, word);
-      afterGreen.push(word);
-    }
-  }
-  return afterGreen;
-}
-// let newList = letterIncludedAtPos(wordList, 'c', 0);
-// console.log(util.inspect(newList, { maxArrayLength: null }));
-
-//return array rep wordle block assuming guess and answer
-function compare(currentList, guess, answer) {
-
-  let block = [];
-  let newList = [];
-  let newList = = letterIncluded(currentList, guess[0], 0);
-  let i = 1;
-
-  while (newList.length >= ()) {
-    //yellow?
-    newList = letterIncluded(newList, guess[i], i);
-    if (newList.includes(answer)) {
-      block[i] = 1;
-    }
-  }
-
-  newList = currentList;
-
-  for (i = 0; i < answer.length; i++) {
-    //green
-    newList = newList.letterIncludedAtPos(newList, guess[i]);
-  }
-}
-
-module.exports = { letterIncluded, letterIncludedAtPos, letterNotIncluded };
+function updateWordList(wordList) {
+  
+};

@@ -22,31 +22,31 @@ function letterGreen(answer, letter, pos) {
 };
 
 function compareWords(guess, answer) {
-  let charBlock = [0, 0, 0, 0, 0];
+  let valBlock = [0, 0, 0, 0, 0];
   let usedAnswerIndices = new Set();
 
   for (let i = 0; i < answer.length; i++) {
     //green block
     if (letterGreen(answer, guess[i], i)) {
-      charBlock[i] = 2;
+      valBlock[i] = 2;
       usedAnswerIndices.add(i);
-      console.log("inside green", usedAnswerIndices);
+      // console.log("inside green", usedAnswerIndices);
     }
   }
   for (let i = 0; i < answer.length; i++) {
     const [isYellow, indexUsedInAnswer] = letterYellow(answer, guess[i], usedAnswerIndices);
     if (isYellow) {
       //yellow block
-      charBlock[i] = 1;
-      console.log('used: ', indexUsedInAnswer);
+      valBlock[i] = 1;
+      // console.log('used: ', indexUsedInAnswer);
       usedAnswerIndices.add(indexUsedInAnswer);
-      console.log("inside yellow", usedAnswerIndices);
+      // console.log("inside yellow", usedAnswerIndices);
     }
   }
-  return charBlock;
+  return valBlock;
 };
 
-console.log(compareWords('teeth', 'three'));
-console.log(compareWords('tooth', 'trope'));
+// console.log(compareWords('teeth', 'three'));
+// console.log(compareWords('tooth', 'trope'));
 
 module.exports = { compareWords };
