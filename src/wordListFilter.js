@@ -5,9 +5,10 @@ const { createWordList } = require('./createWordArray');
 const { compareWords} = require("./initialBlockUpdate");
 
 const bot = {
-  char: new Array(),
-  val: new Array(),
-  pos: new Array(),
+  char: [],
+  val: [],
+  pos: [],
+  yellowLetters: []
 };
 
 let wordList = createWordList();
@@ -19,18 +20,21 @@ let valBlock = compareWords(guess, answer);
 compareWords(guess, answer);
 
 function updateBot() {
-  console.log("bot know not", bot);
-
-  //for testing, assign length to bot.pos
-  for (let i = 0; i < answer.length; i++) {
-    bot.pos.push(i);
-  }
-  console.log("assign bot.pos", bot);
 
   //after comparing first guess against answer
   //update bot.val as valBlock from compareWords
   bot.val = valBlock;
-  console.log("assign bot.val", bot);
+  // console.log("assign bot.val", bot);
+
+  for (let i = 0; i < answer.length; i++) {
+    //for testing, assign length to bot.pos
+    bot.pos.push(i);
+    //push yellow letters to array for reference
+    if (bot.val[i] === 1) {
+      bot.yellowLetters.push(guess[i]);
+    }
+  }
+  // console.log("assign bot.pos", bot);
 
   //get green letters in right pos
   for (let i = 0; i < answer.length; i++) {
@@ -40,7 +44,7 @@ function updateBot() {
       bot.char[i] = '?';
     }
   }
-  console.log("assign green letters", bot);
+  console.log("info after initial comparison", bot);
   return bot;
 };
 
