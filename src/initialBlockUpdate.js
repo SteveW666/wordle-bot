@@ -49,4 +49,4 @@ function compareWords(guess, answer) {
 // console.log(compareWords('teeth', 'three'));
 // console.log(compareWords('tooth', 'trope'));
 
-module.exports = { compareWords };
+module.exports = { compareWords, letterYellow };
