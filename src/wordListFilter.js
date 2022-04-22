@@ -54,7 +54,24 @@ function sum(block) {
   return k;
 };
 
+function arraysEqual(a, b) {
+  if (a.length != b.length) {
+    return false;
+  }
+  for (let i = 0; i < a.length; i++) {
+    if (!(a[i] === b[i])) return false;
+  }
+  return true;
+};
+
 function isCompatible(block, guess, previousGuess) {
+  // assume guess is the actual answer, try calculating the coloring of "previousGuess".
+  // if we get the same coloring as block, it means guess is consistent
+  // with the known information and potentially a valid guess.
+  
+  // one issue with this is it assumes yellows are assigned from left to right
+  return arraysEqual(compareWords(previousGuess, guess), block);
+
   //eliminates grey blocks
   // for (i = 0; i < block.length; i++) {
   // if (block[i] === 0 && guess.includes(previousGuess[i])) { return 0; }
@@ -64,16 +81,20 @@ function isCompatible(block, guess, previousGuess) {
   // if (block[i] === 2 && guess[i] != previousGuess[i]) { return 0; }
   // }
   //checks if the guess returns at least as good a block as the previousGuess's block
-  return (sum(block) >= sum(compareWords(guess, previousGuess)) ? 0 : 1)
+  //return (sum(block) >= sum(compareWords(guess, previousGuess)) ? 0 : 1)
 };
 console.log(isCompatible([2, 1, 0, 1, 1], 'teeth', 'three'));
 
 //Update list of valid answers
 function cullAnswers(answerList, block, previousGuess) {
-  let newAnswerList = [];
-  for (let word of answerList) {
-    if (isCompatible(block, word, previousGuess)) { newAnswerList.push(word) }
-  }
-  return newAnswerList;
+  // let newAnswerList = [];
+  // for (let word of answerList) {
+  //   if (isCompatible(block, word, previousGuess)) { newAnswerList.push(word) }
+  // }
+  // return newAnswerList;
+  
+  // shorter:
+  return answerList.filter(word => isCompatible(block, word, previousGuess))
 };
 console.log(cullAnswers(wordList, [2, 1, 1, 2, 0], 'alarm'));
+console.log(cullAnswers(wordList, [2, 1, 0, 0, 2], 'ctxxh'));
