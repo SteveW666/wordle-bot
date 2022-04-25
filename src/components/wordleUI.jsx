@@ -1,4 +1,5 @@
 import React from 'react';
+import './wordleUI.scss';
 
 export default function wordleUI() {
   return (
