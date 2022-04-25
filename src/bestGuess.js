@@ -1,14 +1,16 @@
-import React from 'react';
+
 
 const { compareWords } = require("./initialBlockUpdate");
 const { cullAnswers } = require("./wordListFilter");
 
 let answerList = ['wrath', 'about', 'robot', 'ulcer'];
 
-function nextBestGuess(answerList) {
+let answers = [];
+function nextBestGuess() {
   // let k = 0;
   
   for (let answer of answerList) {
+    answers.push(answer);
     // console.log(answer);
     
 
@@ -22,9 +24,12 @@ function nextBestGuess(answerList) {
     // }
   }
   // console.log(k, answerList);
-  return answerList;
+  console.log(answers);
+  return answers;
 };
 
-nextBestGuess(answerList);
+// nextBestGuess();
+
+module.exports = { nextBestGuess }
 
 
