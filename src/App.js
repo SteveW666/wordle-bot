@@ -1,8 +1,11 @@
+import WordleUI from './components/wordleUI';
+import BotLogic from './components/botLogic';
 
 function App() {
   return (
     <div className="App">
-      <div>hello world</div>
+      <WordleUI />
+      <BotLogic />
     </div>
   );
 }

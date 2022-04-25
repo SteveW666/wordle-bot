@@ -9,16 +9,16 @@ let wordList = createWordList();
 let guess = 'smart';
 let answer = 'alert';
 // let answer = wordList[Math.floor(Math.random() * wordList.length)];
-// let valBlock = compareWords(guess, answer);
+let valBlock = compareWords(guess, answer);
 
 compareWords(guess, answer);
 
-// const bot = {
-// char: [],
-// val: valBlock,
-// pos: [],
-// yellowLetters: []
-// };
+const bot = {
+char: [],
+val: valBlock,
+pos: [],
+yellowLetters: []
+};
 
 function updateBot() {
   //after comparing first guess against answer
@@ -46,13 +46,13 @@ function updateBot() {
 
 // updateBot();
 
-function sum(block) {
-  let k = 0;
-  for (i = 0; i < block.length; i++) {
-    k = block[i] + k;
-  }
-  return k;
-};
+// function sum(block) {
+//   let k = 0;
+//   for (i = 0; i < block.length; i++) {
+//     k = block[i] + k;
+//   }
+//   return k;
+// };
 
 function arraysEqual(a, b) {
   if (a.length != b.length) {
@@ -71,6 +71,8 @@ function isCompatible(block, guess, previousGuess) {
   
   // one issue with this is it assumes yellows are assigned from left to right
   return arraysEqual(compareWords(previousGuess, guess), block);
+  // arrays equal? [0, 1] === [0, 1] returns true;
+  // sum equal? [0, 1] === [1, 0] returns true;
 
   //eliminates grey blocks
   // for (i = 0; i < block.length; i++) {
@@ -81,9 +83,9 @@ function isCompatible(block, guess, previousGuess) {
   // if (block[i] === 2 && guess[i] != previousGuess[i]) { return 0; }
   // }
   //checks if the guess returns at least as good a block as the previousGuess's block
-  //return (sum(block) >= sum(compareWords(guess, previousGuess)) ? 0 : 1)
+  //return (sum(block) < sum(compareWords(guess, previousGuess)))
 };
-console.log(isCompatible([2, 1, 0, 1, 1], 'teeth', 'three'));
+// console.log(isCompatible([2, 1, 0, 1, 1], 'teeth', 'three'));
 
 //Update list of valid answers
 function cullAnswers(answerList, block, previousGuess) {
@@ -94,7 +96,9 @@ function cullAnswers(answerList, block, previousGuess) {
   // return newAnswerList;
   
   // shorter:
-  return answerList.filter(word => isCompatible(block, word, previousGuess))
+  return answerList.filter(word => isCompatible(block, word, previousGuess));
 };
-console.log(cullAnswers(wordList, [2, 1, 1, 2, 0], 'alarm'));
-console.log(cullAnswers(wordList, [2, 1, 0, 0, 2], 'ctxxh'));
+// console.log(cullAnswers(wordList, [2, 1, 1, 2, 0], 'alarm'));
+// console.log(cullAnswers(wordList, [2, 1, 0, 0, 2], 'ctxxh'));
+
+module.exports = { cullAnswers };

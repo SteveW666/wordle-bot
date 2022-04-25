@@ -2,7 +2,7 @@
 //returns a [boolean, index used in answer] pair
 function letterYellow(answer, letter, usedAnswerIndices) {
   // search answer for `letter` without using any of the indices in answer given in usedAnswerIndices
-  for (j = 0; j < answer.length; j++) {
+  for (let j = 0; j < answer.length; j++) {
     if (usedAnswerIndices.has(j)) {
       continue;
     }
