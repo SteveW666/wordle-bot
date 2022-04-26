@@ -3,7 +3,7 @@
 const { compareWords } = require("./initialBlockUpdate");
 const { cullAnswers } = require("./wordListFilter");
 
-let answerList = ['wrath', 'about', 'robot', 'ulcer'];
+let answerList = ['wrath', 'about', 'robot', 'ulcek'];
 
 // let answers = [];
 function nextBestGuess(answerList, guess) {
@@ -13,10 +13,11 @@ function nextBestGuess(answerList, guess) {
     
     for (let word of answerList) {
       let block = compareWords(guess, word);
-      console.log('answer: ', answer);
-      console.log('word: ', word);
+      //console.log('answer: ', answer);
+      //console.log('word: ', word);
       console.log('block: ', block);
       console.log(cullAnswers(answerList, block, answer));
+      k = k + cullAnswers(answerList, block, answer).length;
     }
   }
   console.log(k, answerList);
@@ -24,8 +25,8 @@ function nextBestGuess(answerList, guess) {
   return answerList;
 };
 
-nextBestGuess(answerList, 'about');
+nextBestGuess(answerList, 'uleck');
 
-module.exports = { nextBestGuess }
+module.exports = { nextBestGuess };
 
 
