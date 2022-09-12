@@ -5,7 +5,6 @@ const { cullAnswers } = require("./wordListFilter");
 
 let answerList = ['wrath', 'about', 'robot', 'ulcek'];
 
-// let answers = [];
 function nextBestGuess(answerList, guess) {
   let k = 0;
   
